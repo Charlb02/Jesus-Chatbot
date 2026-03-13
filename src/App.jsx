@@ -53,10 +53,12 @@ function ChipButton({ children, onClick, primary = false, accent }) {
 export default function App() {
   const { meta, intro, actions, returnPath, topics } = content
   const theme = meta.theme
+
   const topicMap = React.useMemo(
     () => Object.fromEntries(topics.map((topic) => [topic.id, topic])),
     [topics]
   )
+
   const initialMessage = React.useMemo(
     () => ({ sender: meta.agentName, text: intro, type: 'intro' }),
     [meta.agentName, intro]
@@ -125,11 +127,8 @@ export default function App() {
     >
       <div
         style={{
-          maxWidth: 1150,
+          maxWidth: 760,
           margin: '0 auto',
-          display: 'grid',
-          gap: 24,
-          gridTemplateColumns: 'minmax(0, 1.2fr) minmax(280px, 0.8fr)',
         }}
       >
         <div
@@ -224,68 +223,7 @@ export default function App() {
             )}
           </div>
         </div>
-
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
-          <div
-            style={{
-              background: '#ffffff',
-              borderRadius: 24,
-              padding: 20,
-              boxShadow: '0 10px 24px rgba(0,0,0,0.08)',
-            }}
-          >
-            <h2 style={{ marginTop: 0 }}>كيف تعدل المحتوى</h2>
-            <div style={{ lineHeight: 1.9, color: '#374151' }}>
-              <div>1) افتح الملف: <b>src/data/content.json</b></div>
-              <div>2) عدّل الافتتاحية داخل <b>intro</b></div>
-              <div>3) عدّل الأزرار داخل <b>actions</b></div>
-              <div>4) أضف أو احذف موضوعًا داخل <b>topics</b></div>
-            </div>
-          </div>
-
-          <div
-            style={{
-              background: '#ffffff',
-              borderRadius: 24,
-              padding: 20,
-              boxShadow: '0 10px 24px rgba(0,0,0,0.08)',
-            }}
-          >
-            <h2 style={{ marginTop: 0 }}>ما الذي يمكنك تغييره بسهولة؟</h2>
-            <div style={{ lineHeight: 1.9, color: '#374151' }}>
-              <div>• اسم المتكلم</div>
-              <div>• نص البداية</div>
-              <div>• عدد الأسباب</div>
-              <div>• الردود والآيات والصلوات</div>
-              <div>• ألوان الواجهة من theme</div>
-            </div>
-          </div>
-
-          <div
-            style={{
-              background: '#ecfdf5',
-              borderRadius: 24,
-              padding: 20,
-              border: '1px solid #a7f3d0',
-              color: '#065f46',
-            }}
-          >
-            <h2 style={{ marginTop: 0 }}>مناسب للنشر</h2>
-            <div style={{ lineHeight: 1.9 }}>
-              هذا المشروع جاهز كنقطة بداية لموقع صغير يمكن استضافته ثم ربطه برابط أو QR code.
-              <div style={{ marginTop: 8 }}>{meta.footerNote}</div>
-            </div>
-          </div>
-        </div>
       </div>
-
-      <style>{`
-        @media (max-width: 900px) {
-          div[dir="rtl"] > div {
-            grid-template-columns: 1fr !important;
-          }
-        }
-      `}</style>
     </div>
   )
 }
