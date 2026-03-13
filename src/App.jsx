@@ -85,15 +85,20 @@ export default function App() {
     [meta.agentName, pushMessage]
   )
 
-  const chooseTopic = (topicId) => {
-    const topic = topicMap[topicId]
-    if (!topic) return
+ const chooseTopic = (topicId) => {
+  const topic = topicMap[topicId]
+  if (!topic) return
 
-    setActiveTopicId(topicId)
-    pushMessage(meta.userName, topic.title, 'choice')
-    delayedBotMessage(`${topic.reply}\n\n${topic.verse}`)
+  setActiveTopicId(topicId)
+  pushMessage(meta.userName, topic.title, 'choice')
+
+  if (topicId === 'examination') {
+    delayedBotMessage(topic.reply)
+    return
   }
 
+  delayedBotMessage(`${topic.reply}\n\n${topic.verse}`)
+}
   const followUp = (kind) => {
     const topic = topicMap[activeTopicId]
     if (!topic) return
